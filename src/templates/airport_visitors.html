@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Airport Visitors{% endblock %}
+{% block content %}
+<h1>🛬 Airport Visitors</h1>
+<div class="card">
+  <form method="POST">
+    <label for="airline_name">Airline Name</label>
+    <input type="text" id="airline_name" name="airline_name" required value="{{ airline_name or '' }}">
+    <label for="date_from">Date From</label>
+    <input type="date" id="date_from" name="date_from" required value="{{ date_from or '' }}">
+    <label for="date_to">Date To</label>
+    <input type="date" id="date_to" name="date_to" required value="{{ date_to or '' }}">
+    <button type="submit" class="btn">Search</button>
+  </form>
+</div>
+{% if results %}
+<div class="card">
+  <h2>Results</h2>
+  <table>
+    <tr><th>Airport</th><th>Visitors</th></tr>
+    {% for row in results %}
+    <tr>
+      <td>{{ row.airport_name }}</td>
+      <td>{{ row.visitor_count }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endif %}
+{% endblock %}

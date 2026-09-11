@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Airline by Age{% endblock %}
+{% block content %}
+<h1>👥 Find Airline by Age</h1>
+<div class="card">
+  <form method="POST">
+    <label for="min_age">Minimum Age</label>
+    <input type="number" id="min_age" name="min_age" required>
+    <label for="max_age">Maximum Age</label>
+    <input type="number" id="max_age" name="max_age" required>
+    <button type="submit" class="btn">Search</button>
+  </form>
+</div>
+{% if result %}
+<div class="card">
+  <h2>Result</h2>
+  <table>
+    <tr><th>Airline</th><th>Passengers</th><th>Airplanes</th></tr>
+    <tr>
+      <td>{{ result.airline_name }}</td>
+      <td>{{ result.passenger_count }}</td>
+      <td>{{ result.airplane_count }}</td>
+    </tr>
+  </table>
+</div>
+{% endif %}
+{% endblock %}

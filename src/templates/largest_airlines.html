@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Largest Airlines{% endblock %}
+{% block content %}
+<h1>🏆 Largest Airlines</h1>
+<div class="card">
+  <p>Airlines ranked by number of flights and fleet size.</p>
+  <table>
+    <tr><th>#</th><th>Airline</th><th>Code</th><th>Airplanes</th><th>Flights</th></tr>
+    {% for row in results %}
+    <tr>
+      <td>{{ loop.index }}</td>
+      <td>{{ row.airline_name }}</td>
+      <td>{{ row.airline_code }}</td>
+      <td>{{ row.airplane_count }}</td>
+      <td>{{ row.flight_count }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}
