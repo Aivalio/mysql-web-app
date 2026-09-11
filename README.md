@@ -73,8 +73,7 @@ Clean 3-layer architecture following the **Single Responsibility Principle**:
 
 ## 🚀 Live Demo
 
-👉 **[flight-search.onrender.com](https://flight-search.onrender.com/)** *(placeholder — θα βάλεις το πραγματικό μετά το deploy)*
-
+👉 **[mysql-web-app.onrender.com](https://mysql-web-app.onrender.com/)**
 ---
 
 ## 📦 Installation
