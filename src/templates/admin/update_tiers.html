@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Update Passenger Tiers{% endblock %}
+
+{% block content %}
+<h1>⭐ Update Passenger Tiers</h1>
+<p>Admin only — recalculates loyalty tiers based on flight counts.</p>
+
+<div class="card">
+  <form method="POST">
+    <label for="airline_name">Airline Name</label>
+    <input type="text" id="airline_name" name="airline_name" required placeholder="e.g. Aegean Airlines">
+
+    <label for="tier">Filter by Tier (optional)</label>
+    <select id="tier" name="tier">
+      <option value="">— none —</option>
+      <option value="Basic">Basic</option>
+      <option value="Silver">Silver</option>
+      <option value="Gold">Gold</option>
+      <option value="Platinum">Platinum</option>
+    </select>
+
+    <button type="submit" class="btn">Update Tiers</button>
+  </form>
+</div>
+
+{% if passengers %}
+<div class="card">
+  <h2>Passengers</h2>
+  <table>
+    <tr><th>Name</th><th>Surname</th><th>Tier</th></tr>
+    {% for p in passengers %}
+    <tr>
+      <td>{{ p.name }}</td>
+      <td>{{ p.surname }}</td>
+      <td>{{ p.tier }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endif %}
+{% endblock %}
