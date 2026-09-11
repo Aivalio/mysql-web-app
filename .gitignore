@@ -25,3 +25,15 @@ Thumbs.db
 instance/
 *.sqlite3
 *.db
+
+# Local database dumps (never commit)
+flights.sql
+*.sql
+
+# Local admin scripts (contain credentials)
+import_to_aiven.py
+verify_data.py
+test_connection.py
+check_tables.py
+check.py
+debug_read.py
