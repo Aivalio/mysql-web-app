@@ -1,6 +1,7 @@
 """Configuration loader for environment variables."""
 import os
 
+from sqlalchemy.pool import StaticPool
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -32,4 +33,12 @@ class Config:
     }
 	    # Admin auth
     ADMIN_USERNAME: str = os.getenv("ADMIN_USERNAME", "admin")
-    ADMIN_PASSWORD_HASH: str = os.getenv("ADMIN_PASSWORD_HASH", "")	
+
+
+class TestConfig(Config):
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
+    SQLALCHEMY_ENGINE_OPTIONS = {
+        "poolclass": StaticPool,
+        "connect_args": {"check_same_thread": False},
+    }
