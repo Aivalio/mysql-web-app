@@ -8,11 +8,10 @@
 </head>
 <body>
   <nav>
-    <a href="{{ url_for('main.index') }}" class="brand">✈️ Flight Search</a>
-    <a href="{{ url_for('main.find_airline_by_age') }}">Airline by Age</a>
-    <a href="{{ url_for('main.find_airport_visitors') }}">Airport Visitors</a>
-    <a href="{{ url_for('main.find_alternative_flights') }}">Alternative Flights</a>
-    <a href="{{ url_for('main.find_largest_airlines') }}">Largest Airlines</a>
+    <a href="{{ url_for('main.airline_by_age') }}">Airline by Age</a>
+    <a href="{{ url_for('main.airport_visitors') }}">Airport Visitors</a>
+    <a href="{{ url_for('main.alternative_flights') }}">Alternative Flights</a>
+    <a href="{{ url_for('main.largest_airlines') }}">Largest Airlines</a>
     <span class="spacer"></span>
     {% if current_user.is_authenticated %}
       <span style="color: #94a3b8; font-size: 13px;">👤 {{ current_user.username }}</span>

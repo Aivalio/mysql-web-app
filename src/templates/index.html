@@ -7,28 +7,28 @@
 <p>Explore the airline database with five powerful queries.</p>
 
 <div class="grid">
-  <a href="{{ url_for('main.find_airline_by_age') }}" class="card">
+  <a href="{{ url_for('main.airline_by_age') }}" class="card">
     <h3>👥 Airline by Age</h3>
     <p>Find the airline with the most passengers in an age range.</p>
   </a>
 
-  <a href="{{ url_for('main.find_airport_visitors') }}" class="card">
+  <a href="{{ url_for('main.airport_visitors') }}" class="card">
     <h3>🛬 Airport Visitors</h3>
     <p>Count passengers per airport for a given airline and date range.</p>
   </a>
 
-  <a href="{{ url_for('main.find_alternative_flights') }}" class="card">
+  <a href="{{ url_for('main.alternative_flights') }}" class="card">
     <h3>🔀 Alternative Flights</h3>
     <p>Find flights between two cities on a given date.</p>
   </a>
 
-  <a href="{{ url_for('main.find_largest_airlines') }}" class="card">
+  <a href="{{ url_for('main.largest_airlines') }}" class="card">
     <h3>🏆 Largest Airlines</h3>
     <p>Rank airlines by fleet size and flight count.</p>
   </a>
 
   {% if current_user.is_authenticated %}
-  <a href="{{ url_for('admin.update_tiers') }}" class="card">
+  <a href="{{ url_for('main.find_largest_airlines') }}" class="card">
     <h3>⭐ Update Passenger Tiers</h3>
     <p>Admin only — recalculate loyalty tiers.</p>
   </a>
