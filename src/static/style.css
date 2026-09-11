@@ -130,3 +130,19 @@ tr:hover { background: #f8fafc; }
   transform: translateY(-3px);
   box-shadow: 0 6px 16px rgba(0,0,0,0.1);
 }
+
+
+/* Home button in nav */
+nav .home-btn {
+  background: #0066cc;
+  color: white !important;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  transition: background 0.15s;
+}
+
+nav .home-btn:hover {
+  background: #0055aa;
+}
