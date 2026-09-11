@@ -30,3 +30,6 @@ class Config:
         "pool_pre_ping": True,
         "pool_recycle": 280,
     }
+	    # Admin auth
+    ADMIN_USERNAME: str = os.getenv("ADMIN_USERNAME", "admin")
+    ADMIN_PASSWORD_HASH: str = os.getenv("ADMIN_PASSWORD_HASH", "")	
