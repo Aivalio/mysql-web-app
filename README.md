@@ -1,4 +1,4 @@
-<div align="center">
+span
 
 # ✈️ Flight Search App
 
@@ -27,15 +27,17 @@ Built as a portfolio project to practice **Flask blueprints**, **SQLAlchemy ORM*
 
 ## ✨ Features
 
-| Query | Description |
-|---|---|
-| 👥 **Airline by Age** | Airline with the most passengers in a given age range |
-| 🛬 **Airport Visitors** | Distinct passenger count per airport, for an airline + date range |
-| 🔀 **Alternative Flights** | Flights between two cities on a specific date (active airlines only) |
-| 🏆 **Largest Airlines** | All airlines ranked by fleet size and flight count |
-| ⭐ **Update Passenger Tiers** | Admin-only: recalculate loyalty tiers (Basic/Silver/Gold/Platinum) |
+
+| Query                        | Description                                                          |
+| ---------------------------- | -------------------------------------------------------------------- |
+| 👥**Airline by Age**         | Airline with the most passengers in a given age range                |
+| 🛬**Airport Visitors**       | Distinct passenger count per airport, for an airline + date range    |
+| 🔀**Alternative Flights**    | Flights between two cities on a specific date (active airlines only) |
+| 🏆**Largest Airlines**       | All airlines ranked by fleet size and flight count                   |
+| ⭐**Update Passenger Tiers** | Admin-only: recalculate loyalty tiers (Basic/Silver/Gold/Platinum)   |
 
 **Plus:**
+
 - 🔐 Admin authentication (bcrypt-hashed credentials via env vars)
 - 📱 Responsive layout with a shared base template
 - ⚠️ Flash messages for errors and empty results
@@ -47,9 +49,33 @@ Built as a portfolio project to practice **Flask blueprints**, **SQLAlchemy ORM*
 
 Clean 3-layer architecture following the **Single Responsibility Principle**:
 
-
+```
+┌──────────────────────────────────┐
+│  Routes (src/routes/)            │  ← HTTP, forms, flash
+│  main.py · auth.py · admin.py    │
+└───────────────┬──────────────────┘
+                │
+┌───────────────▼──────────────────┐
+│  Services (src/services/)        │  ← Business logic
+│  airline_service.py              │
+│  flight_service.py               │
+│  passenger_service.py            │
+│  auth_service.py                 │
+└───────────────┬──────────────────┘
+                │
+┌───────────────▼──────────────────┐
+│  Models (src/models/)            │  ← SQLAlchemy ORM
+│  6 entities + 2 association      │
+│  tables (M2M)                    │
+└───────────────┬──────────────────┘
+                │
+┌───────────────▼──────────────────┐
+│  MySQL (existing schema)         │
+└──────────────────────────────────┘
+```
 
 **Design principles:**
+
 - **Routes know nothing about SQL.** They call services.
 - **Services know nothing about Flask.** They call models.
 - **Models know nothing about business rules.** They define structure only.
@@ -59,32 +85,45 @@ Clean 3-layer architecture following the **Single Responsibility Principle**:
 
 ## 🛠️ Tech Stack
 
-| Layer | Technology | Purpose |
-|---|---|---|
-| **Web** | Flask 3.0 | Blueprints, sessions, forms |
-| **ORM** | Flask-SQLAlchemy 3.1 | Typed models, complex JOINs |
-| **DB** | MySQL 8 + PyMySQL | Existing relational schema |
-| **Auth** | Flask-Login + Werkzeug | Session-based admin login |
-| **Config** | python-dotenv | Env vars for secrets |
-| **Templates** | Jinja2 | Base + page inheritance |
-| **Tests** | pytest + SQLite in-memory | 14 unit tests |
+
+| Layer         | Technology                | Purpose                     |
+| ------------- | ------------------------- | --------------------------- |
+| **Web**       | Flask 3.0                 | Blueprints, sessions, forms |
+| **ORM**       | Flask-SQLAlchemy 3.1      | Typed models, complex JOINs |
+| **DB**        | MySQL 8 + PyMySQL         | Existing relational schema  |
+| **Auth**      | Flask-Login + Werkzeug    | Session-based admin login   |
+| **Config**    | python-dotenv             | Env vars for secrets        |
+| **Templates** | Jinja2                    | Base + page inheritance     |
+| **Tests**     | pytest + SQLite in-memory | 14 unit tests               |
 
 ---
 
 ## 🚀 Live Demo
 
 👉 **[mysql-web-app.onrender.com](https://mysql-web-app.onrender.com/)**
+
+> ⚠️ Hosted on Render + Aiven free tiers. The database may sleep after inactivity; the first request may take 10–30 seconds.
+
 ---
 
 ## 📸 Screenshots
 
-| Home | Find Airline by Age |
-|------|---------------------|
-| ![Home](docs/screenshots/home.png) | ![Airline by Age](docs/screenshots/airline-by-age.png) |
 
-| Largest Airlines | Airport Visitors |
-|------------------|------------------|
-| ![Largest Airlines](docs/screenshots/largest-airlines.png) | ![Airport Visitors](docs/screenshots/airport-visitors.png) |
+| Home                               | Find Airline by Age                                    |
+| ---------------------------------- | ------------------------------------------------------ |
+| ![Home](docs/screenshots/home.jpg) | ![Airline by Age](docs/screenshots/airline-by-age.jpg) |
+
+
+| Largest Airlines                                           | Airport Visitors                                           |
+| ---------------------------------------------------------- | ---------------------------------------------------------- |
+| ![Largest Airlines](docs/screenshots/largest-airlines.jpg) | ![Airport Visitors](docs/screenshots/airport-visitors.jpg) |
+
+
+| Alternative Flights                                              |
+| ---------------------------------------------------------------- |
+| ![Alternative Flights](docs/screenshots/alternative-flights.jpg) |
+
+---
 
 ## 📦 Installation
 
@@ -100,17 +139,6 @@ Clean 3-layer architecture following the **Single Responsibility Principle**:
 git clone https://github.com/Aivalio/mysql-web-app.git
 cd mysql-web-app
 ```
-
-
-
-**Design principles:**
-- **Routes know nothing about SQL.** They call services.
-- **Services know nothing about Flask.** They call models.
-- **Models know nothing about business rules.** They define structure only.
-- **Everything is testable** with an in-memory SQLite DB.
-
----
-
 
 ### 2. Virtual environment
 
@@ -187,12 +215,13 @@ pytest tests/ -v
 
 **Coverage:** 14 tests, using an in-memory SQLite DB with deterministic fixtures.
 
-| File | What's tested |
-|---|---|
-| `test_airline_service.py` | Age-range query, no results, airline ranking |
-| `test_flight_service.py` | Active-airline filter, unknown city, distinct passenger count |
-| `test_passenger_service.py` | Tier boundaries, update flow, unknown airline, get-by-tier |
-| `test_auth_service.py` | Wrong user, wrong password, success, unconfigured hash |
+
+| File                        | What's tested                                                 |
+| --------------------------- | ------------------------------------------------------------- |
+| `test_airline_service.py`   | Age-range query, no results, airline ranking                  |
+| `test_flight_service.py`    | Active-airline filter, unknown city, distinct passenger count |
+| `test_passenger_service.py` | Tier boundaries, update flow, unknown airline, get-by-tier    |
+| `test_auth_service.py`      | Wrong user, wrong password, success, unconfigured hash        |
 
 **Test design:**
 
@@ -212,7 +241,7 @@ mysql-web-app/
 │   ├── extensions.py                # db, login_manager
 │   ├── models/
 │   │   ├── __init__.py
-│   │   ├── associations.py          # airlines_has_airplanes, flights_has_passengers
+│   │   ├── associations.py
 │   │   ├── airline.py
 │   │   ├── airplane.py
 │   │   ├── airport.py
@@ -227,9 +256,9 @@ mysql-web-app/
 │   │   └── auth_service.py
 │   ├── routes/
 │   │   ├── __init__.py
-│   │   ├── main.py                  # Home + 4 queries
-│   │   ├── auth.py                  # Login / logout
-│   │   └── admin.py                 # Tier update (auth-protected)
+│   │   ├── main.py
+│   │   ├── auth.py
+│   │   └── admin.py
 │   ├── templates/
 │   │   ├── base.html
 │   │   ├── index.html
@@ -250,7 +279,9 @@ mysql-web-app/
 │   ├── test_flight_service.py
 │   ├── test_passenger_service.py
 │   └── test_auth_service.py
-├── run.py                           # Dev server entry point
+├── docs/
+│   └── screenshots/
+├── run.py
 ├── requirements.txt
 ├── .env.example
 ├── .gitignore
@@ -271,12 +302,12 @@ mysql-web-app/
 
 ## 🗺️ Roadmap
 
-- [ ] Add caching for the "Largest Airlines" query
-- [ ] Expose the same data as a REST API (Flask-RESTful)
-- [ ] Alembic migrations for schema evolution
-- [ ] Dockerfile + docker-compose for one-command setup
-- [ ] Pagination for large result sets
-- [ ] Export results as CSV
+- [ ]  Add caching for the "Largest Airlines" query
+- [ ]  Expose the same data as a REST API (Flask-RESTful)
+- [ ]  Alembic migrations for schema evolution
+- [ ]  Dockerfile + docker-compose for one-command setup
+- [ ]  Pagination for large result sets
+- [ ]  Export results as CSV
 
 ---
 
