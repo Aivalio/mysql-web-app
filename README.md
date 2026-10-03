@@ -102,7 +102,12 @@ Clean 3-layer architecture following the **Single Responsibility Principle**:
 
 👉 **[mysql-web-app.onrender.com](https://mysql-web-app.onrender.com/)**
 
-> ⚠️ Hosted on Render + Aiven free tiers. The database may sleep after inactivity; the first request may take 10–30 seconds.
+> ⚠️ **Note:** This demo is hosted on **Render** (web) and **Aiven** (MySQL),
+> both using free tiers. The database may sleep after periods of inactivity.
+> The first request can take **10–30 seconds** to wake up. If the demo is
+> unreachable, the screenshots below show the full functionality, and the
+> source code is available on GitHub. You can also run it locally with
+> **`docker compose up`**.
 
 ---
 
