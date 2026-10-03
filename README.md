@@ -8,7 +8,7 @@
 [![Flask](https://img.shields.io/badge/Flask-3.0+-000000?logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
 [![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)
 [![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-2.0-D71F00?logo=sqlalchemy&logoColor=white)](https://www.sqlalchemy.org/)
-[![pytest](https://img.shields.io/badge/tests-14%20passed-brightgreen?logo=pytest&logoColor=white)](#-testing)
+[![pytest](https://img.shields.io/badge/tests-21%20passed-brightgreen?logo=pytest&logoColor=white)](#-testing)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 </div>
@@ -67,7 +67,7 @@ Clean 3-layer architecture following the **Single Responsibility Principle**:
 | **Auth** | Flask-Login + Werkzeug | Session-based admin login |
 | **Config** | python-dotenv | Env vars for secrets |
 | **Templates** | Jinja2 | Base + page inheritance |
-| **Tests** | pytest + SQLite in-memory | 14 unit tests |
+| **Tests** | pytest + SQLite in-memory | 21 unit tests |
 
 ---
 
@@ -162,10 +162,15 @@ python -c "import secrets; print(secrets.token_hex(32))"
 Generate an admin password hash:
 
 ```bash
-python -c "from werkzeug.security import generate_password_hash; print(generate_password_hash('your_admin_password'))"
+python scripts/generate_password_hash.py
+# or:  python scripts/generate_password_hash.py 'your_admin_password'
 ```
 
-Paste the result into `ADMIN_PASSWORD_HASH` in `.env`.
+Paste the printed hash into `ADMIN_PASSWORD_HASH` in `.env`.
+
+> 🔐 **Admin login is disabled by default.** `ADMIN_PASSWORD_HASH` is read from
+> the environment by `src/config.py` — if it is empty, `/auth/login` rejects
+> every attempt and the "Update Passenger Tiers" page stays locked.
 
 > ⚠️ **Never commit `.env`.** It is ignored by Git.
 
@@ -185,7 +190,7 @@ Open http://127.0.0.1:5000
 pytest tests/ -v
 ```
 
-**Coverage:** 14 tests, using an in-memory SQLite DB with deterministic fixtures.
+**Coverage:** 21 tests, using an in-memory SQLite DB with deterministic fixtures.
 
 | File | What's tested |
 |---|---|
@@ -193,6 +198,7 @@ pytest tests/ -v
 | `test_flight_service.py` | Active-airline filter, unknown city, distinct passenger count |
 | `test_passenger_service.py` | Tier boundaries, update flow, unknown airline, get-by-tier |
 | `test_auth_service.py` | Wrong user, wrong password, success, unconfigured hash |
+| `test_config_auth_flow.py` | Config loads `ADMIN_PASSWORD_HASH`, login route end-to-end, tier page auth, hash-generator script |
 
 **Test design:**
 

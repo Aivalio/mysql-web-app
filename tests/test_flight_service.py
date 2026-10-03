@@ -2,8 +2,8 @@
 import datetime
 
 from src.services.flight_service import (
-    find_alternative_flights,
     find_airport_visitors,
+    find_alternative_flights,
 )
 
 
