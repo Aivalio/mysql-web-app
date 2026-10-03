@@ -7,7 +7,6 @@ from src.services.passenger_service import (
     update_passenger_tiers,
 )
 
-
 admin_bp = Blueprint("admin", __name__, url_prefix="/admin")
 
 

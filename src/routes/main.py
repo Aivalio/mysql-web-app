@@ -8,10 +8,9 @@ from src.services.airline_service import (
     find_largest_airlines,
 )
 from src.services.flight_service import (
-    find_alternative_flights,
     find_airport_visitors,
+    find_alternative_flights,
 )
-
 
 main_bp = Blueprint("main", __name__)
 

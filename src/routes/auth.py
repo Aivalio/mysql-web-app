@@ -4,7 +4,6 @@ from flask_login import login_required, login_user, logout_user
 
 from src.services.auth_service import authenticate
 
-
 auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
 
 

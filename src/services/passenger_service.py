@@ -61,10 +61,17 @@ def update_passenger_tiers(airline_name: str) -> int:
     if not counts:
         raise ValueError(f"No passengers found for airline '{airline_name}'.")
 
+    # Map each passenger id to its tier once, from the counts query we already
+    # ran (no extra per-passenger round-trip -> no N+1).
+    tiers = {row["passenger_id"]: _get_tier_for_count(row["total_flights"]) for row in counts}
     try:
-        for row in counts:
-            passenger = db.session.get(Passenger, row["passenger_id"])
-            passenger.tier = _get_tier_for_count(row["total_flights"])
+        passengers = (
+            db.session.query(Passenger)
+            .filter(Passenger.id.in_(tiers.keys()))
+            .all()
+        )
+        for passenger in passengers:
+            passenger.tier = tiers[passenger.id]
         db.session.commit()
     except Exception:
         db.session.rollback()

@@ -3,7 +3,6 @@ from sqlalchemy import Column, ForeignKey, Table
 
 from src.extensions import db
 
-
 # airlines <-> airplanes (many-to-many)
 airlines_has_airplanes = Table(
     "airlines_has_airplanes",

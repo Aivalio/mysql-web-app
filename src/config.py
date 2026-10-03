@@ -1,8 +1,8 @@
 """Configuration loader for environment variables."""
 import os
 
-from sqlalchemy.pool import StaticPool
 from dotenv import load_dotenv
+from sqlalchemy.pool import StaticPool
 
 load_dotenv()
 
@@ -31,8 +31,12 @@ class Config:
         "pool_pre_ping": True,
         "pool_recycle": 280,
     }
-	    # Admin auth
+
+    # Admin auth
     ADMIN_USERNAME: str = os.getenv("ADMIN_USERNAME", "admin")
+    # Werkzeug-hashed password (see scripts/generate_password_hash.py).
+    # Empty -> admin login disabled.
+    ADMIN_PASSWORD_HASH: str = os.getenv("ADMIN_PASSWORD_HASH", "")
 
 
 class TestConfig(Config):
