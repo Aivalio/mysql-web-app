@@ -76,6 +76,16 @@ Clean 3-layer architecture following the **Single Responsibility Principle**:
 👉 **[mysql-web-app.onrender.com](https://mysql-web-app.onrender.com/)**
 ---
 
+## 📸 Screenshots
+
+| Home | Find Airline by Age |
+|------|---------------------|
+| ![Home](docs/screenshots/home.png) | ![Airline by Age](docs/screenshots/airline-by-age.png) |
+
+| Largest Airlines | Airport Visitors |
+|------------------|------------------|
+| ![Largest Airlines](docs/screenshots/largest-airlines.png) | ![Airport Visitors](docs/screenshots/airport-visitors.png) |
+
 ## 📦 Installation
 
 ### Prerequisites
