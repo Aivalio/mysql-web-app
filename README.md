@@ -8,7 +8,7 @@ span
 [![Flask](https://img.shields.io/badge/Flask-3.0+-000000?logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
 [![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)
 [![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-2.0-D71F00?logo=sqlalchemy&logoColor=white)](https://www.sqlalchemy.org/)
-[![pytest](https://img.shields.io/badge/tests-14%20passed-brightgreen?logo=pytest&logoColor=white)](#-testing)
+[![Tests](https://github.com/Aivalio/mysql-web-app/actions/workflows/tests.yml/badge.svg)](https://github.com/Aivalio/mysql-web-app/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 </div>
